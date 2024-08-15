@@ -72,5 +72,9 @@ public class TestQueue {
         
         // นำข้อมูลสุดท้ายออกจาก stack ทำให้ stack ว่าง
         stack.pop();
+
+        // ทดสอบเมื่อ Stack ว่าง
+        System.out.println(stack.pop()); // คาดหวังผลลัพธ์: ค่าว่างเปล่า, -1
+        System.out.println(stack.top()); // คาดหวังผลลัพธ์: ค่าว่างเปล่า, -1
     }
 }
