@@ -1,0 +1,71 @@
+import java.util.ArrayDeque;
+import java.util.Queue;
+
+class StackUsingQueueArray {
+
+    private Queue<Integer> q1 = new ArrayDeque<>();
+    private Queue<Integer> q2 = new ArrayDeque<>();
+
+    public void push(int x) {
+      
+       q2.add(x);
+
+       while (!q1.isEmpty()) {
+        q2.add(q1.remove());
+       }
+
+       Queue<Integer> temp = q1;
+       q1 = q2;
+       q2 = temp;
+    }
+
+    public int pop() {
+        if (q1.isEmpty()) {
+            System.out.println("ค่าว่าง");
+            return -1;
+        }
+        return q1.remove();
+    }
+    public int top() {
+        if (q1.isEmpty()) {
+            // ถ้า Stack ว่าง ให้แสดงข้อความและคืนค่า -1
+            System.out.println("Stack is empty");
+            return -1;
+        }
+        // คืนค่าข้อมูลบนสุดของ Stack
+        return q1.peek();
+    }
+
+    // เมธอดตรวจสอบว่า Stack ว่างหรือไม่
+    public boolean empty() {
+        return q1.isEmpty();
+    }
+}
+public class TestQueueArray {
+    public static void main(String[] args) {
+        StackUsingQueueArray stack = new StackUsingQueueArray();
+
+        // ทดสอบการใส่ข้อมูลลงใน Stack
+        stack.push(10);
+        stack.push(20);
+        stack.push(30);
+
+        // ดูข้อมูลบนสุดของ Stack
+        System.out.println(stack.top()); // คาดหวังผลลัพธ์: 30
+
+        // นำข้อมูลออกจาก Stack และดูข้อมูลบนสุดใหม่
+        stack.pop();
+        System.out.println(stack.top()); // คาดหวังผลลัพธ์: 20
+
+        // นำข้อมูลออกจาก Stack และดูข้อมูลบนสุดใหม่
+        stack.pop();
+        System.out.println(stack.top()); // คาดหวังผลลัพธ์: 10
+
+        // นำข้อมูลออกจาก Stack ทำให้ Stack ว่าง
+        stack.pop();
+
+        // ทดสอบเมื่อ Stack ว่าง
+        System.out.println(stack.pop()); // คาดหวังผลลัพธ์: Stack is empty, -1
+        System.out.println(stack.top()); // คาดหวังผลลัพธ์: Stack is empty, -1
+    }
+}
